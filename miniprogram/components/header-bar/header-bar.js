@@ -29,7 +29,8 @@ Component({
    */
   data: {
     likeUrl: unlike,
-    likeStatus: false
+    likeStatus: false,
+    shareUrl: '/images/icon/share.png'
   },
 
   /**
@@ -39,14 +40,21 @@ Component({
     toggleLike: function() {
       let data = this.data
       if (data.likeUrl === like) {
+        // 暴露事件到父组件
+        this.triggerEvent('clickLike', { like: false })
         this.setData({
           likeUrl: unlike
         })
       } else {
+        this.triggerEvent('clickLike', { like: true })
         this.setData({
           likeUrl: like
         })
       }
+    },
+    onShare: function() {
+      // 暴露事件到父组件
+      this.triggerEvent('share')
     }
   }
 })

@@ -14,5 +14,8 @@
       <image src="{{likeUrl}}" class="like-icon icon" bindtap="toggleLike"></image>
       <view class="like-badge">{{count}}</view>
     </view>
+    <view class="option-share">
+      <image src="{{shareUrl}}" class="share-icon icon" bindtap="onShare"></image>
+    </view>
   </view>
 </view>
