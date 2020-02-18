@@ -19,8 +19,12 @@
 }
 .old-cover-wrapper .old-cover-text {
   position: absolute;
-  top: 250rpx;
   background: white;
+  left: 100rpx;
+  right: 100rpx;
+  bottom: 40rpx;
+  display: flex;
+  justify-content: space-between;
 }
 .old-cover-avatar {
   position: absolute;
@@ -40,4 +44,9 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+}
+
+.about-icon {
+  width: 32rpx;
+  height: 32rpx;
 }

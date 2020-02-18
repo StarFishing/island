@@ -8,6 +8,7 @@ Page({
   data: {
     bgImg: '/images/bg.jpeg',
     bagUrl: '',
+    aboutIcon: '/images/icon/about.png',
     userText: 'Click Me'
   },
 
@@ -86,5 +87,11 @@ Page({
     //     }
     //   }
     // })
+  },
+  /**
+   * 关于我们
+   */
+  aboutUs: function() {
+    console.log('关于我们')
   }
 })
