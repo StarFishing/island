@@ -62,31 +62,38 @@ Page({
     //   .then(res => {
     //     console.log(res)
     //   })
+    let _self = this
     // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.record" 这个 scope
-    wx.getUserInfo({
-      success: res => {
-        console.log(res.userInfo.avatarUrl)
-        this.setData({
-          bagUrl: res.userInfo.avatarUrl,
-          userText: ''
-        })
-        app.globalData.userInfo = res.userInfo
-      }
-    })
+    console.log(app.globalData.userInfo)
+    if (app.globalData.userInfo) {
+      this.setData({
+        bagUrl: app.globalData.avatarUrl,
+        userText: ''
+      })
+    } else {
+      wx.authorize({
+        scope: 'scope.userInfo',
+        success() {
+          wx.getUserInfo({
+            success: user => {
+              console.log(user.userInfo.avatarUrl)
+              _self.setData({
+                bagUrl: user.userInfo.avatarUrl,
+                userText: ''
+              })
+              app.globalData.userInfo = user.userInfo
+            }
+          })
+        }
+      })
+      // wx.getSetting({
+      //   success(res) {
+      //     if (!res.authSetting['scope.userInfo']) {
 
-    // wx.getSetting({
-    //   success(res) {
-    //     console.log(app.globalData)
-    //     if (!res.authSetting['scope.userInfo']) {
-    //       wx.authorize({
-    //         scope: 'scope.userInfo',
-    //         success(user) {
-    //           console.log(user)
-    //         }
-    //       })
-    //     }
-    //   }
-    // })
+      //     }
+      //   }
+      // })
+    }
   },
   /**
    * 关于我们

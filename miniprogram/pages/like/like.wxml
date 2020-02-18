@@ -10,7 +10,7 @@
       <text>关于我们</text>
     </view>
     <view class="like-number">
-      <text></text>
+      <text>0</text>
       <text>喜欢的书</text>
     </view>
   </view>
