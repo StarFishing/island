@@ -26,6 +26,13 @@
   display: flex;
   justify-content: space-between;
 }
+.old-cover-text .about,
+.like-number {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .old-cover-avatar {
   position: absolute;
   top: 50%;
