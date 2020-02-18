@@ -7,9 +7,10 @@ Page({
    */
   data: {
     bgImg: '/images/bg.jpeg',
-    bagUrl: '',
+    avatarUrl: '',
     aboutIcon: '/images/icon/about.png',
-    userText: 'Click Me'
+    userText: 'Click Me',
+    count: 0
   },
 
   /**
@@ -58,7 +59,7 @@ Page({
     let _self = this
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
-      bagUrl: app.globalData.userInfo.avatarUrl,
+      avatarUrl: app.globalData.userInfo.avatarUrl,
       userText: ''
     })
     wx.cloud
