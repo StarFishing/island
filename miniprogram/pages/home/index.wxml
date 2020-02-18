@@ -1,2 +1,2 @@
-<!--pages/home/index.wxml-->
-<text>pages/home/index.wxml</text>
+<!-- pages/home/index.wxml -->
+<header-bar></header-bar>

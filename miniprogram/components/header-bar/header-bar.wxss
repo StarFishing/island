@@ -1,0 +1,10 @@
+/* components/header-bar/header-bar.wxss */
+@import '/style/base.wxss';
+.island-header-bar {
+  display: flex;
+  justify-content: space-between;
+  background: yellow;
+}
+.island-header-bar .header-bar-time {
+  color: rgba(38, 38, 48, 0.5);
+}
