@@ -3,9 +3,9 @@
 .island-header-bar {
   display: flex;
   justify-content: space-between;
-  height: 80rpx;
+  height: 100rpx;
   align-items: center;
-  padding: 0 20rpx;
+  padding: 0 30rpx;
 }
 .header-bar-time,
 .header-bar-option {
@@ -18,12 +18,12 @@
   margin-top: 10rpx;
 }
 .header-bar-time .time-day {
-  font-weight: 700;
-  font-size: 48rpx;
+  font-weight: 800;
+  font-size: 54rpx;
 }
 .header-bar-time .divider {
   margin: 0 16rpx;
-  height: 40rpx;
+  height: 44rpx;
   width: 2rpx;
   background-color: rgba(38, 38, 48, 0.5);
 }
@@ -42,10 +42,14 @@
   position: absolute;
   color: rgba(38, 38, 48, 0.5);
   top: -10rpx;
-  left: 34rpx;
+  left: 40rpx;
   font-size: 24rpx;
 }
 .share-icon {
-  width: 26rpx;
-  height: 26rpx;
+  width: 32rpx;
+  height: 32rpx;
+}
+.like-icon {
+  width: 40rpx;
+  height: 40rpx;
 }
