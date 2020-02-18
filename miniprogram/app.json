@@ -1,0 +1,40 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/book/book",
+    "pages/like/like"
+  ],
+  "window": {
+    "backgroundColor": "#ffffff",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "旧岛小样",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#aaa",
+    "selectedColor": "#000000",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "流行",
+        "iconPath": "images/tab-bar/pop.png",
+        "selectedIconPath": "images/tab-bar/pop-active.png"
+      },
+      {
+        "pagePath": "pages/book/book",
+        "text": "书单",
+        "iconPath": "images/tab-bar/book.png",
+        "selectedIconPath": "images/tab-bar/book-active.png"
+      },
+      {
+        "pagePath": "pages/like/like",
+        "text": "喜欢",
+        "iconPath": "images/tab-bar/like.png",
+        "selectedIconPath": "images/tab-bar/like-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

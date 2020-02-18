@@ -1,0 +1,5 @@
+<!--components/card-like.wxml-->
+<view class="card-like-wrapper">
+  <view>这里是组件的内部节点</view>
+  <slot></slot>
+</view>
