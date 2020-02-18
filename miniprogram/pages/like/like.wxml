@@ -1,7 +1,9 @@
 <view class="old-cover-wrapper">
   <image src="{{bgImg}}" class="cover-bg-img"></image>
-  <view class="old-cover-avatar" bind:tap="getUserInfo" style="background-image:url('{{bagUrl}}')">
-    {{userText}}
+  <view class="old-cover-avatar" style="background-image:url('{{bagUrl}}')">
+    <button wx:if="{{userText}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="login">
+      登录
+    </button>
   </view>
   <view class="bg-rotat"></view>
   <view class="old-cover-text">
