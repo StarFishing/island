@@ -10,7 +10,10 @@ Page({
     likeStatus: false,
     month: '二月',
     day: '14',
-    year: '1997'
+    year: '1997',
+    article_id: 0,
+    openid: 0,
+    _id: 0
   },
 
   /**
@@ -62,6 +65,7 @@ Page({
    * 点击喜欢
    */
   onLike: function(like) {
+    let _self = this
     let isLogin = this.getUserInfo()
     if (!isLogin) {
       wx.showToast({
@@ -70,34 +74,77 @@ Page({
       })
       return
     } else {
+      if (!this.data.openid) {
+        this.setData({
+          openid: app.globalData.userInfo.openid
+        })
+      }
+      let openid = app.globalData.userInfo.openid
+
       if (like.detail.isLike) {
-        // 插入数据
         db.collection('praise')
-          .add({
-            data: {
-              count: this.data.count + 1,
-              likeStatus: true
-            }
-          })
+          .doc(this.data._id)
+          .get()
           .then(res => {
-            this.setData({
-              count: this.data.count + 1,
-              likeStatus: true
-            })
+            // 查询到已经点过赞则更新数据
+            db.collection('praise')
+              .doc(this.data._id)
+              .update({
+                // data 传入需要局部更新的数据
+                data: {
+                  count: this.data.count + 1,
+                  likeStatus: true
+                },
+                success: function(res) {
+                  _self.setData({
+                    count: _self.data.count + 1,
+                    likeStatus: true
+                  })
+                }
+              })
+          })
+          .catch(() => {
+            // 插入数据
+            db.collection('praise')
+              .add({
+                data: {
+                  count: this.data.count + 1,
+                  likeStatus: true,
+                  openid: openid
+                }
+              })
+              .then(res => {
+                console.log(res)
+                this.setData({
+                  count: this.data.count + 1,
+                  likeStatus: true,
+                  _id: res._id
+                })
+              })
           })
       } else {
         db.collection('praise')
-          .add({
-            data: {
-              count: this.data.count - 1,
-              likeStatus: false
-            }
+          .doc(this.data._id)
+          .get()
+          .then(() => {
+            db.collection('praise')
+              .doc(this.data._id)
+              .update({
+                // data 传入需要局部更新的数据
+                data: {
+                  count: this.data.count - 1,
+                  likeStatus: false
+                },
+                success: function(res) {
+                  _self.setData({
+                    count: _self.data.count - 1,
+                    likeStatus: false
+                  })
+                }
+              })
           })
-          .then(res => {
-            this.setData({
-              count: this.data.count - 1,
-              likeStatus: false
-            })
+          .catch(err => {
+            console.log(err)
           })
       }
     }
