@@ -41,15 +41,15 @@ Component({
       let data = this.data
       if (data.likeUrl === like) {
         // 暴露事件到父组件
-        this.triggerEvent('clickLike', { like: false })
         this.setData({
           likeUrl: unlike
         })
+        this.triggerEvent('clickLike', { isLike: false })
       } else {
-        this.triggerEvent('clickLike', { like: true })
         this.setData({
           likeUrl: like
         })
+        this.triggerEvent('clickLike', { isLike: true })
       }
     },
     onShare: function() {
