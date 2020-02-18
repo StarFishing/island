@@ -1,10 +1,16 @@
 // pages/home/home.js
+const app = getApp()
+const db = wx.cloud.database() // 初始化数据库
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    count: 0
+    count: 0,
+    likeStatus: false,
+    month: '二月',
+    day: '14',
+    year: '1997'
   },
 
   /**
@@ -56,14 +62,50 @@ Page({
    * 点击喜欢
    */
   onLike: function(like) {
-    if (like.detail.isLike) {
-      this.setData({
-        count: this.data.count + 1
+    let isLogin = this.getUserInfo()
+    if (!isLogin) {
+      wx.showToast({
+        title: '登陆后再来点赞哦~',
+        icon: 'none'
       })
+      return
     } else {
-      this.setData({
-        count: this.data.count - 1
-      })
+      if (like.detail.isLike) {
+        // 插入数据
+        db.collection('praise')
+          .add({
+            data: {
+              count: this.data.count + 1,
+              likeStatus: true
+            }
+          })
+          .then(res => {
+            this.setData({
+              count: this.data.count + 1,
+              likeStatus: true
+            })
+          })
+      } else {
+        db.collection('praise')
+          .add({
+            data: {
+              count: this.data.count - 1,
+              likeStatus: false
+            }
+          })
+          .then(res => {
+            this.setData({
+              count: this.data.count - 1,
+              likeStatus: false
+            })
+          })
+      }
     }
+  },
+  /**
+   * 判断用户授权状态
+   */
+  getUserInfo: function() {
+    return app.globalData.userInfo
   }
 })

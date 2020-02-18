@@ -21,6 +21,10 @@ Component({
     count: {
       type: Number,
       value: 0
+    },
+    likeStatus: {
+      type: Boolean,
+      value: false
     }
   },
 
@@ -28,8 +32,8 @@ Component({
    * 组件的初始数据
    */
   data: {
-    likeUrl: unlike,
-    likeStatus: false,
+    unlike,
+    like,
     shareUrl: '/images/icon/share.png'
   },
 
@@ -38,17 +42,11 @@ Component({
    */
   methods: {
     toggleLike: function() {
-      let data = this.data
-      if (data.likeUrl === like) {
+      let data = this.properties
+      if (data.likeStatus) {
         // 暴露事件到父组件
-        this.setData({
-          likeUrl: unlike
-        })
         this.triggerEvent('clickLike', { isLike: false })
       } else {
-        this.setData({
-          likeUrl: like
-        })
         this.triggerEvent('clickLike', { isLike: true })
       }
     },

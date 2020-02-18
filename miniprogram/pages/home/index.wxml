@@ -1,2 +1,2 @@
 <!-- pages/home/index.wxml -->
-<header-bar count="{{count}}" bind:share="onShare" bind:clickLike="onLike"></header-bar>
+<header-bar count="{{count}}" likeStatus="{{likeStatus}}" day="{{day}}" month="{{month}}" year="{{year}}" bind:share="onShare" bind:clickLike="onLike"></header-bar>

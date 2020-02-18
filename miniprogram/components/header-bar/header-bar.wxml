@@ -11,7 +11,7 @@
   </view>
   <view class="header-bar-option">
     <view class="option-like">
-      <image src="{{likeUrl}}" class="like-icon icon" bindtap="toggleLike"></image>
+      <image src="{{likeStatus?like:unlike}}" class="like-icon icon" bindtap="toggleLike"></image>
       <view class="like-badge">{{count}}</view>
     </view>
     <view class="option-share">
