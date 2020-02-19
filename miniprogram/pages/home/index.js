@@ -13,7 +13,8 @@ Page({
     year: '1997',
     article_id: 0,
     openid: 0,
-    _id: 0
+    _id: 0,
+    submitLike: false
   },
 
   /**
@@ -80,7 +81,10 @@ Page({
         })
       }
       let openid = app.globalData.userInfo.openid
-
+      if (this.data.submitLike) return
+      this.setData({
+        submitLike: true
+      })
       if (like.detail.isLike) {
         db.collection('praise')
           .doc(this.data._id)
@@ -98,7 +102,8 @@ Page({
                 success: function(res) {
                   _self.setData({
                     count: _self.data.count + 1,
-                    likeStatus: true
+                    likeStatus: true,
+                    submitLike: false
                   })
                 }
               })
@@ -118,7 +123,8 @@ Page({
                 this.setData({
                   count: this.data.count + 1,
                   likeStatus: true,
-                  _id: res._id
+                  _id: res._id,
+                  submitLike: false
                 })
               })
           })
@@ -138,7 +144,8 @@ Page({
                 success: function(res) {
                   _self.setData({
                     count: _self.data.count - 1,
-                    likeStatus: false
+                    likeStatus: false,
+                    submitLike: false
                   })
                 }
               })
