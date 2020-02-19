@@ -34,7 +34,12 @@ Component({
   data: {
     unlike,
     like,
-    shareUrl: '/images/icon/share.png'
+    shareUrl: '/images/icon/share.png',
+    shareInfo: {
+      title: '旧岛小样',
+      path: 'pages/home/index',
+      fromButton: 'one'
+    }
   },
 
   /**

@@ -45,6 +45,9 @@
   left: 40rpx;
   font-size: 24rpx;
 }
+.option-share {
+  position: relative;
+}
 .share-icon {
   width: 32rpx;
   height: 32rpx;
@@ -52,4 +55,13 @@
 .like-icon {
   width: 40rpx;
   height: 40rpx;
+}
+button[plain] {
+  border: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  padding: 0;
 }

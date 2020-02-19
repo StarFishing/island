@@ -55,7 +55,13 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {},
+  onShareAppMessage: function(res) {
+    let shareInfo = res.target.dataset.shareinfo
+    return {
+      title: shareInfo.title,
+      path: shareInfo.path
+    }
+  },
   /**
    * 分享
    */
