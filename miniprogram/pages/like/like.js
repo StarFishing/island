@@ -16,7 +16,14 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {},
+  onLoad: function(options) {
+    if (app.globalData.userInfo) {
+      this.setData({
+        userText: '',
+        avatarUrl: app.globalData.userInfo.avatarUrl
+      })
+    }
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -56,21 +63,22 @@ Page({
    * 获取用户信息
    */
   getUserInfo: function(e) {
-    let _self = this
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      avatarUrl: app.globalData.userInfo.avatarUrl,
-      userText: ''
-    })
-    wx.cloud
-      .callFunction({
-        name: 'login'
+    if (e.detail.userInfo) {
+      app.globalData.userInfo = e.detail.userInfo
+      this.setData({
+        avatarUrl: app.globalData.userInfo.avatarUrl,
+        userText: ''
       })
-      .then(res => {
-        app.globalData.userInfo.openid = res.result.openid
-        app.globalData.userInfo.appid = res.result.appid
-        console.log(app.globalData)
-      })
+      wx.cloud
+        .callFunction({
+          name: 'login'
+        })
+        .then(res => {
+          app.globalData.userInfo.openid = res.result.openid
+          app.globalData.userInfo.appid = res.result.appid
+          console.log(app.globalData)
+        })
+    }
   },
   /**
    * 关于我们
