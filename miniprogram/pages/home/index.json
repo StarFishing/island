@@ -1,4 +1,6 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "header-bar": "/components/header-bar/header-bar"
+  }
 }

@@ -1,17 +1,19 @@
 <view class="old-cover-wrapper">
   <image src="{{bgImg}}" class="cover-bg-img"></image>
-  <view class="old-cover-avatar" bind:tap="getUserInfo" style="background-image:url('{{bagUrl}}')">
-    {{userText}}
+  <view class="old-cover-avatar" style="background-image:url('{{avatarUrl}}')">
+    <button wx:if="{{userText}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="login-btn">
+      登录
+    </button>
   </view>
   <view class="bg-rotat"></view>
   <view class="old-cover-text">
     <view class="about">
       <image class="about-icon" bind:tap="aboutUs" src="{{aboutIcon}}"></image>
-      <text>关于我们</text>
+      <text class="about-text">关于我们</text>
     </view>
     <view class="like-number">
-      <text>0</text>
-      <text>喜欢的书</text>
+      <text class="like-book-number">{{count}}</text>
+      <text class="about-text">喜欢的书</text>
     </view>
   </view>
 </view>

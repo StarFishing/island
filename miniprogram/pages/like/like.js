@@ -7,9 +7,10 @@ Page({
    */
   data: {
     bgImg: '/images/bg.jpeg',
-    bagUrl: '',
+    avatarUrl: '',
     aboutIcon: '/images/icon/about.png',
-    userText: 'Click Me'
+    userText: 'Click Me',
+    count: 0
   },
 
   /**
@@ -54,46 +55,22 @@ Page({
   /**
    * 获取用户信息
    */
-  getUserInfo: function() {
-    // wx.cloud
-    //   .callFunction({
-    //     name: 'login'
-    //   })
-    //   .then(res => {
-    //     console.log(res)
-    //   })
+  getUserInfo: function(e) {
     let _self = this
-    // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.record" 这个 scope
-    console.log(app.globalData.userInfo)
-    if (app.globalData.userInfo) {
-      this.setData({
-        bagUrl: app.globalData.avatarUrl,
-        userText: ''
+    app.globalData.userInfo = e.detail.userInfo
+    this.setData({
+      avatarUrl: app.globalData.userInfo.avatarUrl,
+      userText: ''
+    })
+    wx.cloud
+      .callFunction({
+        name: 'login'
       })
-    } else {
-      wx.authorize({
-        scope: 'scope.userInfo',
-        success() {
-          wx.getUserInfo({
-            success: user => {
-              console.log(user.userInfo.avatarUrl)
-              _self.setData({
-                bagUrl: user.userInfo.avatarUrl,
-                userText: ''
-              })
-              app.globalData.userInfo = user.userInfo
-            }
-          })
-        }
+      .then(res => {
+        app.globalData.userInfo.openid = res.result.openid
+        app.globalData.userInfo.appid = res.result.appid
+        console.log(app.globalData)
       })
-      // wx.getSetting({
-      //   success(res) {
-      //     if (!res.authSetting['scope.userInfo']) {
-
-      //     }
-      //   }
-      // })
-    }
   },
   /**
    * 关于我们

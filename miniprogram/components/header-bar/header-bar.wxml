@@ -1,0 +1,21 @@
+<!-- components/header-bar/header-bar.wxml -->
+<view class="island-header-bar">
+  <view class="header-bar-time">
+    <text class="time-title">No.</text>
+    <text class="time-day">{{day}}</text>
+    <view class="divider"></view>
+    <view class="time-fullyear">
+      <text class="time-month">{{month}}</text>
+      <text class="time-year">{{year}}</text>
+    </view>
+  </view>
+  <view class="header-bar-option">
+    <view class="option-like">
+      <image src="{{likeStatus?like:unlike}}" class="like-icon icon" bindtap="toggleLike"></image>
+      <view class="like-badge">{{count}}</view>
+    </view>
+    <view class="option-share">
+      <image src="{{shareUrl}}" class="share-icon icon" bindtap="onShare"></image>
+    </view>
+  </view>
+</view>
