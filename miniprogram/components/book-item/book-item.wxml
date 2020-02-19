@@ -1,0 +1,7 @@
+<!--components/book-item.wxml-->
+<view class="book-item-wrapper">
+  <image src="{{frontCover}}" ></image>
+  <text class="book-item-name">{{name}}</text>
+  <text class="book-item-author">{{author}}</text>
+  <text class="book-item-like">{{count}} 喜欢</text>
+</view>
