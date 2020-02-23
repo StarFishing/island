@@ -14,7 +14,8 @@ Page({
     article_id: 0, // 当前文章id
     openid: 0, // 当前用户id
     _id: 0, // 当前文章数据库id
-    submitLike: false // 是否正在提交
+    submitLike: false, // 是否正在提交,
+    articleList: null
   },
 
   /**
@@ -28,6 +29,9 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
+    wx.showLoading({
+      title: '加载中'
+    })
     let _self = this
     wx.getSetting({
       success(res) {
@@ -46,6 +50,8 @@ Page({
         }
       }
     })
+
+    this.getArticalList()
   },
 
   setUserInfoOnGloable: function() {
@@ -221,5 +227,24 @@ Page({
    */
   getUserInfo: function() {
     return app.globalData.userInfo
+  },
+  getArticalList: function() {
+    wx.cloud
+      .callFunction({
+        name: 'getArticalList'
+      })
+      .then(res => {
+        wx.hideLoading()
+        if (res.result.data) {
+          this.setData({
+            articleList: res.result.data
+          })
+        } else {
+          wx.showToast({
+            title: res.result.errMsg,
+            icon: 'none'
+          })
+        }
+      })
   }
 })
