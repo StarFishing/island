@@ -1,3 +1,4 @@
 <!-- pages/home/index.wxml -->
 <header-bar count="{{articleItemHeader.count}}" likeStatus="{{articleItemHeader.likeStatus}}" day="{{articleItemHeader.day}}" month="{{articleItemHeader.month}}" year="{{articleItemHeader.year}}" bind:share="onShare" bind:clickLike="onLike" wx:if="{{articleList}}"></header-bar>
 <card-info cover="{{articleItem.cover}}" type="{{articleItem.type}}" title="{{articleItem.title}}" sourceLink="{{articleItem.sourceLink}}" desc="{{articleItem.desc}}" wx:if="{{articleList}}"></card-info>
+<next-bar bind:prev="handlePrev" bind:next="handleNext" title="{{articleItem.title}}" wx:if="{{articleList}}" class="option" currentIndex="{{articleItemIndex}}" length="{{articleItemLength}}"></next-bar>

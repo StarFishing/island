@@ -1,0 +1,8 @@
+<!-- components/next-bar/index.wxml -->
+<view class="island-next-bar-wrapper">
+  <view class="island-next-bar">
+    <image src="{{currentIndex>0&&currentIndex<=length-1? next:prev}}" class="icon prev" bindtap="handlePrev"></image>
+    <view class="island-next-text">{{title}}</view>
+    <image src="{{currentIndex<length-1?next:prev}}" class="icon next" bindtap="handleNext"></image>
+  </view>
+</view>

@@ -2,6 +2,7 @@
   "component": true,
   "usingComponents": {
     "header-bar": "/components/header-bar/header-bar",
-    "card-info":"/components/card-info/index"
+    "card-info":"/components/card-info/index",
+    "next-bar":"/components/next-bar/index"
   }
 }

@@ -1,0 +1,29 @@
+/* components/next-bar/index.wxss */
+@import '/style/base.wxss';
+.island-next-bar-wrapper {
+  height: 80rpx;
+}
+.island-next-bar {
+  margin: 0 auto;
+  width: 500rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  background: rgba(38, 38, 48, 0.04);
+  border-radius: 8rpx;
+  padding: 0 20rpx;
+  font-weight: 100;
+  font-size: 40rpx;
+}
+.island-next-text {
+  flex: 1;
+  text-align: center;
+}
+.prev {
+  transform: rotate(180deg);
+  color: rgba(38, 38, 48, 0.08);
+  flex: 0 0 16px;
+}
+.next {
+  flex: 0 0 16px;
+}

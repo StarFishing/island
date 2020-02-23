@@ -1,1 +1,7 @@
 /* pages/home/index.wxss */
+.option {
+  position: absolute;
+  bottom: 80rpx;
+  left: 0;
+  right: 0;
+}

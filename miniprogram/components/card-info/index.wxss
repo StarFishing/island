@@ -11,6 +11,17 @@
 .island-cover-audio {
   height: 500rpx;
 }
+.island-cover-audio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+}
+.audio-front-cover {
+  border-radius: 50%;
+  width: 400rpx;
+  height: 400rpx;
+}
 .island-info-text {
   height: 509rpx;
   background: #ffffff;
@@ -32,5 +43,8 @@
 }
 .island-type-text.last {
   top: 500rpx;
+  color: #262630;
+}
+.island-type-text.first {
   color: #262630;
 }

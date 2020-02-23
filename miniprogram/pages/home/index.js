@@ -25,7 +25,8 @@ Page({
       day: '14',
       year: '1997'
     },
-    articleItemIndex: 0
+    articleItemIndex: 0,
+    articleItemLength: 0
   },
 
   /**
@@ -181,7 +182,8 @@ Page({
         wx.hideLoading()
         if (res.result.data) {
           this.setData({
-            articleList: res.result.data
+            articleList: res.result.data,
+            articleItemLength: res.result.data.length
           })
           this.setArticleItem()
         } else {
@@ -217,6 +219,18 @@ Page({
         })
         break
       }
+    }
+  },
+  handleNext: function() {
+    if (this.data.articleItemIndex + 1 <= this.data.articleItemLength) {
+      this.data.articleItemIndex = this.data.articleItemIndex + 1
+      this.setArticleItem()
+    }
+  },
+  handlePrev: function() {
+    if (this.data.articleItemIndex - 1 >= 0) {
+      this.data.articleItemIndex = this.data.articleItemIndex - 1
+      this.setArticleItem()
     }
   }
 })
