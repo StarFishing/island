@@ -1,0 +1,18 @@
+<!-- components/card-info/index.wxml -->
+<view class="island-card-info">
+  <view class="island-info-cover">
+    <view class="island-cover-img" wx:if="{{type===1}}">
+      <image src="{{cover}}" class="cover-img" />
+    </view>
+    <view class="island-cover-audio" wx:if="{{sourceLink&&type===2}}"></view>
+  </view>
+  <view class="island-info-text">
+    <view class="info-text">{{desc}}</view>
+  </view>
+  <view class="island-type-text">{{
+    type===1?'电':'音'
+    }}</view>
+  <view class="island-type-text last">{{
+    type===1?'影':'乐'
+    }}</view>
+</view>

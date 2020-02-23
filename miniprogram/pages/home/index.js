@@ -6,16 +6,26 @@ Page({
    * 页面的初始数据
    */
   data: {
-    count: 0, // 点赞数量
-    likeStatus: false, // 是否点过赞
-    month: '二月',
-    day: '14',
-    year: '1997',
-    article_id: 0, // 当前文章id
     openid: 0, // 当前用户id
-    _id: 0, // 当前文章数据库id
+    _id: '', // 当前文章数据库id
     submitLike: false, // 是否正在提交,
-    articleList: null
+    articleList: null,
+    articleItem: {
+      cover: '',
+      type: '',
+      desc: '',
+      sourceLink: '',
+      title: ''
+    },
+    articleItemHeader: {
+      article_id: 0, // 当前文章id
+      count: 0, // 点赞数量
+      likeStatus: false, // 是否点过赞
+      month: '二月',
+      day: '14',
+      year: '1997'
+    },
+    articleItemIndex: 0
   },
 
   /**
@@ -86,33 +96,6 @@ Page({
     })
   },
   /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-    console.log('show')
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {},
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {},
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {},
-
-  /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function(res) {
@@ -121,12 +104,6 @@ Page({
       title: shareInfo.title,
       path: shareInfo.path
     }
-  },
-  /**
-   * 分享
-   */
-  onShare: function() {
-    console.log('分享')
   },
   /**
    * 点击喜欢
@@ -146,78 +123,45 @@ Page({
           openid: app.globalData.userInfo.openid
         })
       }
-      let openid = app.globalData.userInfo.openid
       if (this.data.submitLike) return
       this.setData({
         submitLike: true
       })
       if (like.detail.isLike) {
-        db.collection('praise')
-          .doc(this.data._id)
-          .get()
-          .then(res => {
-            // 查询到已经点过赞则更新数据
-            db.collection('praise')
-              .doc(this.data._id)
-              .update({
-                // data 传入需要局部更新的数据
-                data: {
-                  count: this.data.count + 1,
-                  likeStatus: true
-                },
-                success: function(res) {
-                  _self.setData({
-                    count: _self.data.count + 1,
-                    likeStatus: true,
-                    submitLike: false
-                  })
-                }
-              })
+        wx.cloud
+          .callFunction({
+            name: 'updateArticleLike',
+            data: {
+              praise: true,
+              count: this.data.articleItemHeader.count + 1,
+              id: this.data._id
+            }
           })
-          .catch(() => {
-            // 插入数据
-            db.collection('praise')
-              .add({
-                data: {
-                  count: this.data.count + 1,
-                  likeStatus: true,
-                  openid: openid
-                }
-              })
-              .then(res => {
-                console.log(res)
-                this.setData({
-                  count: this.data.count + 1,
-                  likeStatus: true,
-                  _id: res._id,
-                  submitLike: false
-                })
-              })
+          .then(() => {
+            _self.setData({
+              ['articleItemHeader.count']:
+                this.data.articleItemHeader.count + 1,
+              submitLike: false,
+              ['articleItemHeader.likeStatus']: true
+            })
           })
       } else {
-        db.collection('praise')
-          .doc(this.data._id)
-          .get()
-          .then(() => {
-            db.collection('praise')
-              .doc(this.data._id)
-              .update({
-                // data 传入需要局部更新的数据
-                data: {
-                  count: this.data.count - 1,
-                  likeStatus: false
-                },
-                success: function(res) {
-                  _self.setData({
-                    count: _self.data.count - 1,
-                    likeStatus: false,
-                    submitLike: false
-                  })
-                }
-              })
+        wx.cloud
+          .callFunction({
+            name: 'updateArticleLike',
+            data: {
+              praise: false,
+              count: this.data.articleItemHeader.count - 1,
+              id: this.data._id
+            }
           })
-          .catch(err => {
-            console.log(err)
+          .then(res => {
+            _self.setData({
+              ['articleItemHeader.count']:
+                this.data.articleItemHeader.count - 1,
+              submitLike: false,
+              ['articleItemHeader.likeStatus']: false
+            })
           })
       }
     }
@@ -239,6 +183,7 @@ Page({
           this.setData({
             articleList: res.result.data
           })
+          this.setArticleItem()
         } else {
           wx.showToast({
             title: res.result.errMsg,
@@ -246,5 +191,32 @@ Page({
           })
         }
       })
+  },
+  setArticleItem: function() {
+    for (let i = 0; i < this.data.articleList.length; i++) {
+      if (i === this.data.articleItemIndex) {
+        let item = this.data.articleList[i]
+        this.setData({
+          articleItem: {
+            cover: item.cover,
+            type: item.type,
+            desc: item.desc,
+            sourceLink: item.sourceLink,
+            title: item.title
+          },
+          articleItemHeader: {
+            article_id: item._id, // 当前文章id
+            count: item.linkNum, // 点赞数量
+            likeStatus: item.hasPraise, // 是否点过赞
+            month: item.month,
+            day: item.day,
+            year: item.year
+          },
+          articleItemIndex: i,
+          _id: item._id
+        })
+        break
+      }
+    }
   }
 })

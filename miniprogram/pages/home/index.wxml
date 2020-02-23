@@ -1,2 +1,3 @@
 <!-- pages/home/index.wxml -->
-<header-bar count="{{count}}" likeStatus="{{likeStatus}}" day="{{day}}" month="{{month}}" year="{{year}}" bind:share="onShare" bind:clickLike="onLike" wx:if="{{articleList}}"></header-bar>
+<header-bar count="{{articleItemHeader.count}}" likeStatus="{{articleItemHeader.likeStatus}}" day="{{articleItemHeader.day}}" month="{{articleItemHeader.month}}" year="{{articleItemHeader.year}}" bind:share="onShare" bind:clickLike="onLike" wx:if="{{articleList}}"></header-bar>
+<card-info cover="{{articleItem.cover}}" type="{{articleItem.type}}" title="{{articleItem.title}}" sourceLink="{{articleItem.sourceLink}}" desc="{{articleItem.desc}}" wx:if="{{articleList}}"></card-info>
